@@ -4,11 +4,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-  is_employee = models.BooleanField()
-  is_management = models.BooleanField()
+  
   firstname = models.CharField(max_length=40)
   lastname = models.CharField(max_length=40)
-  username = models.CharField(max_length=40, unique=True)
+  username = models.CharField(max_length=6, unique=True)
   password = forms.CharField(max_length=40)
   email = models.EmailField(max_length=100)
   datetime = models.DateTimeField(auto_now=True)

@@ -9,16 +9,16 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('firstname','lastname','email','datetime', 'username', 'password', 'is_employee', 'is_management')
+        fields = ('firstname','lastname','email','datetime', 'username', 'password')
 
 
 class CustomRegisterSerializer(RegisterSerializer):
-    is_employee = serializers.BooleanField()
-    is_management = serializers.BooleanField()
+    is_staff = serializers.BooleanField()
+    is_superuser = serializers.BooleanField()
 
     class Meta:
         model = User
-        fields = ('firstname','lastname','datetime','email', 'username', 'password', 'is_employee', 'is_management')
+        fields = ('firstname','lastname','datetime','email', 'username', 'password', 'is_staff', 'is_superuser')
 
     def get_cleaned_data(self):
         return {
@@ -26,8 +26,8 @@ class CustomRegisterSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password1', ''),
             'password2': self.validated_data.get('password2', ''),
             'email': self.validated_data.get('email', ''),
-            'is_employee': self.validated_data.get('is_employee', ''),
-            'is_management': self.validated_data.get('is_management', ''),
+            'is_staff': self.validated_data.get('is_staff', ''),
+            'is_superuser': self.validated_data.get('is_superuser', ''),
             'firstname': self.validated_data.get('firstname', ''),
             'lastname': self.validated_data.get('lastname', ''),
             'datetime': self.validated_data.get('datetime', ''),
@@ -38,8 +38,8 @@ class CustomRegisterSerializer(RegisterSerializer):
         adapter = get_adapter()
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
-        user.is_employee = self.cleaned_data.get('is_employee')
-        user.is_management = self.cleaned_data.get('is_management')
+        user.is_staff = self.cleaned_data.get('is_staff')
+        user.is_superuser = self.cleaned_data.get('is_superuser')
         user.save()
         adapter.save_user(request, user, self)
         return user
@@ -47,7 +47,7 @@ class CustomRegisterSerializer(RegisterSerializer):
 
 class TokenSerializer(serializers.ModelSerializer):
     user_type = serializers.SerializerMethodField()
-
+    
     class Meta:
         model = Token
         fields = ('key', 'user', 'user_type')
@@ -56,9 +56,10 @@ class TokenSerializer(serializers.ModelSerializer):
         serializer_data = UserSerializer(
             obj.user
         ).data
-        is_management = serializer_data.get('is_management')
-        is_employee = serializer_data.get('is_employee')
+        is_superuser = serializer_data.get('is_superuser')
+        is_staff = serializer_data.get('is_staff')
         return {
-            'is_management': is_management,
-            'is_employee' : is_employee
+            'is_superuser': is_superuser,
+            'is_staff' : is_staff
         }
+ 
