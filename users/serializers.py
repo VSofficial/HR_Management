@@ -9,16 +9,16 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        fields = ('firstname','lastname','email','datetime', 'username', 'password', 'is_employee', 'is_management')
 
 
 class CustomRegisterSerializer(RegisterSerializer):
-    is_student = serializers.BooleanField()
-    is_teacher = serializers.BooleanField()
+    is_employee = serializers.BooleanField()
+    is_management = serializers.BooleanField()
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        fields = ('firstname','lastname','datetime','email', 'username', 'password', 'is_employee', 'is_management')
 
     def get_cleaned_data(self):
         return {
@@ -26,16 +26,20 @@ class CustomRegisterSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password1', ''),
             'password2': self.validated_data.get('password2', ''),
             'email': self.validated_data.get('email', ''),
-            'is_student': self.validated_data.get('is_student', ''),
-            'is_teacher': self.validated_data.get('is_teacher', '')
+            'is_employee': self.validated_data.get('is_employee', ''),
+            'is_management': self.validated_data.get('is_management', ''),
+            'firstname': self.validated_data.get('firstname', ''),
+            'lastname': self.validated_data.get('lastname', ''),
+            'datetime': self.validated_data.get('datetime', ''),
+            
         }
 
     def save(self, request):
         adapter = get_adapter()
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
-        user.is_student = self.cleaned_data.get('is_student')
-        user.is_teacher = self.cleaned_data.get('is_teacher')
+        user.is_employee = self.cleaned_data.get('is_employee')
+        user.is_management = self.cleaned_data.get('is_management')
         user.save()
         adapter.save_user(request, user, self)
         return user
@@ -52,9 +56,9 @@ class TokenSerializer(serializers.ModelSerializer):
         serializer_data = UserSerializer(
             obj.user
         ).data
-        is_student = serializer_data.get('is_student')
-        is_teacher = serializer_data.get('is_teacher')
+        is_management = serializer_data.get('is_management')
+        is_employee = serializer_data.get('is_employee')
         return {
-            'is_student': is_student,
-            'is_teacher': is_teacher
+            'is_management': is_management,
+            'is_employee' : is_employee
         }
