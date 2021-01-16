@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 
 from .models import User, Employee
 
-
+'''
 class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
@@ -25,8 +25,8 @@ class UserAdmin(BaseUserAdmin):
     list_display = ['email', 'username']
     search_fields = ('email', 'username')
     ordering = ('email',)
+'''
 
-
-admin.site.register(Employee)
-admin.site.register(User, UserAdmin)
-admin.site.unregister(Group)
+#admin.site.register(Employee)
+#admin.site.register(User, UserAdmin)
+#admin.site.unregister(Group)
