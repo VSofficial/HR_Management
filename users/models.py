@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import AbstractUser
 
 
-class User(models.Model):
+class User(AbstractUser):
   
   firstname = models.CharField(max_length=40)
   lastname = models.CharField(max_length=40)
@@ -16,7 +16,7 @@ class User(models.Model):
     return self.username
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(max_length=40,widget=forms.PasswordInput())
+    password = forms.CharField(max_length=200,widget=forms.PasswordInput())
     class Meta:
         model = User
         fields = ('password',)
