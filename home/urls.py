@@ -14,8 +14,7 @@ urlpatterns = [
     path('assignments/', include('api.assignments.urls')),
     path('graded-assignments/', include('api.graded_assignments.urls')),
     path('users/', include('users.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
+    
     
 ]

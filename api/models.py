@@ -9,6 +9,14 @@ class Assignment(models.Model):
     def __str__(self):
         return self.title
 
+'''
+class Holiday(models.Model):
+    title = models.CharField(max_length=50)
+    date = pub_date = models.DateField()
+
+    def __str__(self):
+        return self.title
+'''
 
 class GradedAssignment(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)

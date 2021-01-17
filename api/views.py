@@ -23,6 +23,20 @@ class AssignmentViewSet(viewsets.ModelViewSet):
         return Response(status=HTTP_400_BAD_REQUEST)
 
 
+'''
+class HolidayViewSet(viewsets.ModelViewSet):
+    serializer_class = AssignmentSerializer
+    queryset = Assignment.objects.all()
+
+    def create(self, request):
+        serializer = AssignmentSerializer(data=request.data)
+        if serializer.is_valid():
+            assignment = serializer.create(request)
+            if assignment:
+                return Response(status=HTTP_201_CREATED)
+        return Response(status=HTTP_400_BAD_REQUEST)
+'''
+
 class GradedAssignmentListView(ListAPIView):
     serializer_class = GradedAssignmentSerializer
 
