@@ -1,5 +1,6 @@
 import React from "react";
 import { Table, Button } from "antd";
+
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', width: '10%' },
@@ -44,13 +45,23 @@ const data = [
 class Department extends React.Component {
     render() {
         return (
-            <Table
-                columns={columns}
-                dataSource={data}
-                scroll={{ x: 500 }}
-            // style={{ borderRadius: '10px' }}
-            // scroll={{ x: 500, y: 350 }}
-            ></Table>
+            <div className="site-layout-background"
+                style={{
+                    // margin: '24px 16px',
+                    margin: '20px 40px',
+                    padding: 24,
+                    minHeight: 280,
+                    borderRadius: '8px'
+                }}>
+                <Table
+                    columns={columns}
+                    dataSource={data}
+                    scroll={{ x: 500 }}
+                // style={{ borderRadius: '10px' }}
+                // scroll={{ x: 500, y: 350 }}
+                ></Table>
+            </div>
+
         )
     }
 }
