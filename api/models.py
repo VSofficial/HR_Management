@@ -1,6 +1,34 @@
 from django.db import models
 from users.models import User
 
+'''
+class Holiday(models.Model):
+    title = models.CharField(max_length=50)
+    date = models.DateField()
+
+    def __str__(self):
+        return self.title
+
+class PersonalInfo(models.Model):
+    gender = models.BooleanField()
+    age = models.SmallIntegerField()
+    dateofbirth = models.DateField()
+    salary = models.CharField(max_length=10)
+    role = models.CharField(max_length=100)
+    team = models.charField(max_length=100)
+    description = models.CharField(max_legth=250)
+    username = models.CharField(max_length=40)
+
+
+class Project(models.Model):
+    title = models.CharField()
+    deadline = models.DateField() 
+
+class Features(models.Model):
+    leave_request=models.BooleanField()
+    leave_date=models.DateField()
+'''
+# Seperation Line
 
 class Assignment(models.Model):
     title = models.CharField(max_length=50)
@@ -9,14 +37,7 @@ class Assignment(models.Model):
     def __str__(self):
         return self.title
 
-'''
-class Holiday(models.Model):
-    title = models.CharField(max_length=50)
-    date = pub_date = models.DateField()
 
-    def __str__(self):
-        return self.title
-'''
 
 class GradedAssignment(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)

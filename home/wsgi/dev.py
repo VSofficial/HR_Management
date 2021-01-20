@@ -6,5 +6,3 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "home.settings.dev")
 
 application = get_wsgi_application()
 
-
-WSGIPassAuthorization On
