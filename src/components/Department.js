@@ -56,7 +56,7 @@ class Department extends React.Component {
                 <Table
                     columns={columns}
                     dataSource={data}
-                    scroll={{ x: 500 }}
+                    scroll={{ x: 700 }}
                 // style={{ borderRadius: '10px' }}
                 // scroll={{ x: 500, y: 350 }}
                 ></Table>
