@@ -106,9 +106,11 @@ class CustomLayout extends React.Component {
           </Header>
           <Content className="site-layout-background"
             style={{
-              margin: '24px 16px',
+              // margin: '24px 16px',
+              margin: '40px 40px',
               padding: 24,
               minHeight: 280,
+              borderRadius: '8px'
             }}>
 
             {this.props.children}
