@@ -110,8 +110,8 @@ class CustomLayout extends React.Component {
               padding: 24,
               minHeight: 280,
             }}>
-            Content
-          {this.props.children}
+
+            {this.props.children}
           </Content>
           <Footer></Footer>
         </Layout>

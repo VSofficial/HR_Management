@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import BaseRouter from "./routes";
-import routes from "./Routes2";
 import "antd/dist/antd.css";
 import "./App.css";
 import * as actions from "./store/actions/auth";
