@@ -1,7 +1,53 @@
 from rest_framework import serializers
 
 from users.models import User
-from .models import Assignment, Question, Choice, GradedAssignment
+from .models import Assignment, Question, Choice, GradedAssignment, PersonalInfo
+
+class PersonalInfoSerializer(serializers.ModelSerializer):
+    #questions = serializers.SerializerMethodField()
+    #teacher = StringSerializer(many=False)
+
+    class Meta:
+        #model = PersonalInfo
+        model = User
+       # model = Assignment
+        fields = ('__all__')
+
+
+    def create(self, request):
+        data = request.data
+
+        #info = PersonalInfo()
+        info = User()
+        #assignment = Assignment()
+        #employee = User.objects.get(username=data['employee'])
+        #teacher = User.objects.get(username=data['teacher'])
+        #info.employee=employee
+        #assignment.teacher = teacher
+    
+        
+        info.first_name = data['first_name']
+        #assignment.title = data['title']
+        info.last_name = data['last_name']
+        info.username = data['username']
+        info.email = data['email']
+        info.datetime = data['datetime']
+        info.phone = data['phone']
+        info.joindate = data['joindate']
+        info.role = data['role']
+        info.gender = data['gender']
+        info.dob = data['dob']
+        info.salary = data['salary']
+        info.team = data['team']
+
+         
+        info.save()
+   
+        return info
+
+
+
+# Seperation Line
 
 
 class StringSerializer(serializers.StringRelatedField):
