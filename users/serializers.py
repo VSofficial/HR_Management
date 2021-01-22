@@ -9,7 +9,8 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('firstname','lastname','email','datetime', 'username', 'password')
+        fields = ('firstname','lastname','email','datetime', 'username', 'password','is_staff','is_superuser')
+
 
 
 class CustomRegisterSerializer(RegisterSerializer):
@@ -44,7 +45,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         adapter.save_user(request, user, self)
         return user
 
-
+'''
 class TokenSerializer(serializers.ModelSerializer):
     user_type = serializers.SerializerMethodField()
     
@@ -62,4 +63,11 @@ class TokenSerializer(serializers.ModelSerializer):
             'is_superuser': is_superuser,
             'is_staff' : is_staff
         }
- 
+    
+    if form.is_valid():
+    name = form.cleaned_data['name']
+    number = form.cleaned_data['phone_number']
+    p = Person(name=name, phone_number=number, date_subscribed=datetime.now(), messages_received=0)
+    p.save()
+    '''
+
