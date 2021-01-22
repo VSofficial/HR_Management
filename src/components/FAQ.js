@@ -41,10 +41,10 @@ class FAQ extends React.Component {
                         months of March and September and the revised salaries get affected in the months of April and
                             October.</p>
                     </Panel>
-                    <Panel header="Number of leaves am employee can take ?" key="4">
-                        <p>You are entitled to <b>12 Casual / Sick leaves</b> and <b>15 Privileged / paid leaves</b> every year. The leaves will
-                        be credited to your leave balance <b>@ 1 Casual and 1.25 Privileged leaves per month</b>. The eligibility for
-                        the paid leaves will be on completion of 6 months. You are also eligible for <b>10 paid Holidays</b> every year
+                    <Panel header="Number of leaves an employee can take ?" key="4">
+                        <p>You are entitled to <b>10 Casual / Sick leaves</b> and <b>20 Privileged / paid leaves</b> every year. The leaves will
+                        be credited to your leave balance <b>@ 0.7 Casual and 1.75 Privileged leaves per month</b>. The eligibility for
+                        the paid leaves will be on completion of 6 months. You are also eligible for <b>15 paid Holidays</b> every year
                         including the government mandated holidays. The Company follows strict time schedule and late
                         comings are discouraged, unless otherwise notified by you in advance.   </p>
                     </Panel>
