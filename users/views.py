@@ -22,7 +22,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     
-    permission_classes = (IsAuthenticated,) 
+    #permission_classes = (IsAuthenticated,) 
     #authentication_classes = (Token,) 
 
     def create_auth(request):
@@ -37,6 +37,4 @@ class UserViewSet(viewsets.ModelViewSet):
      else:
         return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
-   
-
-
+    

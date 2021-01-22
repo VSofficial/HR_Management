@@ -1,7 +1,7 @@
 from django.db import models
 from users.models import User
 
-'''
+
 class Holiday(models.Model):
     title = models.CharField(max_length=50)
     date = models.DateField()
@@ -10,23 +10,47 @@ class Holiday(models.Model):
         return self.title
 
 class PersonalInfo(models.Model):
+
+    
+   
+   # name = models.CharField(max_length=50)
+    empid = models.CharField(max_length=10)
+    phone = models.CharField(max_length=10)
+    joindate = models.DateField()
+    role = models.CharField(max_length=40)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     gender = models.BooleanField()
-    age = models.SmallIntegerField()
-    dateofbirth = models.DateField()
+    dob = models.DateField()
     salary = models.CharField(max_length=10)
-    role = models.CharField(max_length=100)
-    team = models.charField(max_length=100)
-    description = models.CharField(max_legth=250)
-    username = models.CharField(max_length=40)
-
-
+    team = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.first_name
+    #NOTE Employee ID is the username in the model
+'''
 class Project(models.Model):
-    title = models.CharField()
-    deadline = models.DateField() 
+    title = models.CharField(max_length=50)
+    #deadline = models.DateField() 
 
-class Features(models.Model):
-    leave_request=models.BooleanField()
-    leave_date=models.DateField()
+
+class Leave(models.Model):
+    # Forign key Emp ID
+    STATUS = (
+        ('true', 'approved'),
+        ('false', 'not approved'),
+        ('null', 'no status'),
+    )
+    
+    date_from = models.DateField()
+    date_to = models.DateField()
+    status = models.CharField(max_length=20, choices=STATUS, default=null)
+    empid = models.CharField(max_length=50)
+
+
+class Departments(models.Model):
+    department = CharField(max_length=40)
+    
 '''
 # Seperation Line
 

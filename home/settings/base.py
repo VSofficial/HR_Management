@@ -22,11 +22,11 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'rest_framework',
-    'rest_framework_jwt',
-    'rest_framework.authtoken',
+   # 'rest_framework_jwt',
+   # 'rest_framework.authtoken',
 
     'api',
-    'users'
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +69,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'build/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 SITE_ID = 1
 
+'''
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
@@ -83,7 +84,7 @@ REST_FRAMEWORK = {
      
     ),
 }
-
+'''
 CSRF_COOKIE_NAME = "csrftoken"
 
 ACCOUNT_UNIQUE_EMAIL = True
@@ -94,11 +95,11 @@ AUTH_USER_MODEL = 'users.User'
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'users.serializers.UserSerializer',
-    'TOKEN_SERIALIZER': 'users.serializers.TokenSerializer'
+   # 'TOKEN_SERIALIZER': 'users.serializers.TokenSerializer'
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
+    #'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
 }
 
 PASSWORD_HASHERS = [
