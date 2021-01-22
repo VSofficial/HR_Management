@@ -33,11 +33,13 @@ class Holidays extends React.Component {
                 <Table
                     columns={columns}
                     dataSource={data}
+                    scroll={{ x: 450 }}
                     pagination={{
                         total: data.length,
                         pageSize: data.length,
                         hideOnSinglePage: true
                     }}
+
                 ></Table>
             </div>
         )

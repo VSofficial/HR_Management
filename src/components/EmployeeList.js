@@ -1,15 +1,21 @@
 import React from "react";
 import { Table, Avatar, Row, Col } from "antd";
+const generateRandomColor = (name) => {
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    // console.log(randomColor);
+    return "#" + randomColor;
+}
 const columns = [
     { title: '#', dataIndex: 'id', key: 'id', width: '10%' },
     {
         title: 'NAME', key: 'emp_name', width: '25%',
         render: (text, record) => (
             <Row>
-                <Col span={5}><Avatar size={40} style={{ color: '#f56a00', backgroundColor: '#fde3cf' }} >{text.emp_name.charAt(0)}</Avatar></Col>
-                <Col span={18}>{console.log(text, record)}
+                {/* <Col span={5}><Avatar size={40} style={{ color: 'white', backgroundColor: generateRandomColor(text.emp_name) }} >{text.emp_name.charAt(0)}</Avatar></Col> */}
+                <Col span={5}><Avatar size={40} style={{ color: 'white', backgroundColor: '#fde3cf' }} >{text.emp_name.charAt(0)}</Avatar></Col>
+                <Col span={18}>
                     <b>{text.emp_name}</b><br></br>{text.email}</Col>
-            </Row>
+            </Row >
             // <div>
 
 
