@@ -1,11 +1,16 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import BaseRouter from "./routes";
 import "antd/dist/antd.css";
+import "./App.css";
 import * as actions from "./store/actions/auth";
 
 import CustomLayout from "./containers/Layout";
+import AuthLayout from "./containers/AuthLayout";
+// import Login from "./containers/Login";
+import Login from "./containers/Login2";
+import AssignmentList from "./containers/AssignmentList";
 
 class App extends Component {
   componentDidMount() {
@@ -14,11 +19,13 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      // <Login />
+      <Router >
         <CustomLayout {...this.props}>
           <BaseRouter />
         </CustomLayout>
       </Router>
+
     );
   }
 }
