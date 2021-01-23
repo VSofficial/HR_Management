@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
-from django.http import HttpResponse
 from django.views.generic import TemplateView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -15,7 +14,7 @@ urlpatterns = [
     path('assignments/', include('api.assignments.urls')),
     path('leave/', include('api.leave.urls')),
     path('personalinfo/', include('api.personalinfo.urls')),
-    #path('count/', include('api.emp_count.urls')),
+    path('emp_count/', include('api.emp_count.urls')),
     #path('graded-assignments/', include('api.graded_assignments.urls')),
     path('users/', include('users.urls')),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
