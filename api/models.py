@@ -15,7 +15,7 @@ class User(models.Model):
   
   first_name = models.CharField(max_length=40)
   last_name = models.CharField(max_length=40)
-  username = models.CharField(max_length=10, unique=True, primary_key=True)
+  username = models.CharField(max_length=10, null=False,unique=True, primary_key=True)
   email = models.EmailField(max_length=100)
   date_joined = models.DateField(auto_now=True,null=True)
   phone = models.CharField(max_length=10, null=True, blank=True)
@@ -45,10 +45,10 @@ class Leave(models.Model):
     date_from = models.DateField()
     date_to = models.DateField()
     status = models.CharField(max_length=10)
-    empid = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-     return self.empid
+     return self.username
 
 '''
 class PersonalInfo(models.Model):

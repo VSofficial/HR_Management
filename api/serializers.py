@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.db.models import F
 from django.http import HttpResponse
 from rest_framework.response import Response
-from .models import Assignment, Question, Choice, GradedAssignment, User
+from .models import Assignment, Question, Choice, GradedAssignment, User, Leave
 
 
 class PersonalInfoSerializer(serializers.ModelSerializer):
@@ -58,16 +58,17 @@ class LeaveSerializer(serializers.ModelSerializer):
     #username = StringSerializer(many=True)
 
     class Meta:
-        model = User
-        fields = ('date_from','date_to','email')
+        model = Leave
+        fields = ('date_from','date_to','username')
         #fields = ('__all__')
 
 
-    def create(self, request):
+    def post(self, request):
         data = request.data
 
         leaveinfo = User()
-        user = User.objects.get(email=data['email'])
+
+        user = User.objects.get(username=data['username'])
         #datafile = request.data['email']
         #usernaAme = User.objects.filter(username=user).get()
         '''
@@ -77,7 +78,7 @@ class LeaveSerializer(serializers.ModelSerializer):
         
         task1 = User.objects.filter(email=user).update(date_from=F('date_from'))
         task2 = User.objects.filter(email=user).update(date_to=F('date_to'))
-
+        
         #leaveinfo.username = user
        # assignment.title = data['title']
       #  leaveinfo.save()
