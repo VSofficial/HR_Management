@@ -20,50 +20,7 @@ class CustomLayout extends React.Component {
   };
   render() {
     return (
-      // <Layout className="layout">
-      //   <Header>
-      //     <div className="logo" />
-      //     <Menu
-      //       theme="dark"
-      //       mode="horizontal"
-      //       defaultSelectedKeys={["2"]}
-      //       style={{ lineHeight: "64px" }}
-      //     >
-      //       {this.props.isAuthenticated ? (
-      //         <Menu.Item key="2" onClick={this.props.logout}>
-      //           Logout
-      //         </Menu.Item>
-      //       ) : (
-      //         <Menu.Item key="2">
-      //           <Link to="/login">Login</Link>
-      //         </Menu.Item>
-      //       )}
-      //     </Menu>
-      //   </Header>
-      //   <Content style={{ padding: "0 50px" }}>
-      //     <Breadcrumb style={{ margin: "16px 0" }}>
-      //       <Breadcrumb.Item>
-      //         <Link to="/">Home</Link>
-      //       </Breadcrumb.Item>
-      //       {this.props.token !== null ? (
-      //         <Breadcrumb.Item>
-      //           <Link to={`/profile/${this.props.userId}`}>Profile</Link>
-      //         </Breadcrumb.Item>
-      //       ) : null}
-      //       {this.props.token !== null && this.props.is_teacher ? (
-      //         <Breadcrumb.Item>
-      //           <Link to="/create">Create</Link>
-      //         </Breadcrumb.Item>
-      //       ) : null}
-      //     </Breadcrumb>
-      //     <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
-      //       {this.props.children}
-      //     </div>
-      //   </Content>
-      //   <Footer style={{ textAlign: "center" }}>
-      //     Ant Design ©2016 Created by Ant UED
-      //   </Footer>
-      // </Layout>
+
       <Layout>
         <Sider
           trigger={null} collapsible collapsed={this.state.collapsed}
@@ -78,7 +35,7 @@ class CustomLayout extends React.Component {
           style={{ minHeight: 600 }}
         >
           <div className="logo" />
-          <Menu theme="dark" mode="inline" >
+          <Menu theme="dark" mode="inline" selectedKeys={[this.props.location.pathname]}>
             <Menu.Item key="/Employee" ><Link to="/Employee"><span><UserOutlined />Employee</span></Link></Menu.Item>
             <MenuItem key="/Department" ><Link to="/Department"><span><DeploymentUnitOutlined />Departments</span></Link></MenuItem>
             <MenuItem key="/Project" ><Link to="/Project"><span><FundProjectionScreenOutlined />Projects</span></Link></MenuItem>
@@ -92,7 +49,7 @@ class CustomLayout extends React.Component {
               className: 'trigger',
               onClick: this.toggle,
             })} */}
-            <Menu style={{ float: 'right' }} theme="dark" mode="horizontal" overflowedIndicator={<MenuOutlined />}>
+            <Menu style={{ float: 'right' }} selectedKeys={[this.props.location.pathname]} theme="dark" mode="horizontal" overflowedIndicator={<MenuOutlined />}>
               <Menu.Item key='/' ><Link to="/"><span>Home</span></Link></Menu.Item>
               {/* <Menu.Item key='/About' ><Link to="/About"><span>About</span></Link></Menu.Item> */}
               <Menu.Item key='/Holidays' ><Link to="/Holidays"><span>Holidays</span></Link></Menu.Item>
@@ -104,17 +61,7 @@ class CustomLayout extends React.Component {
               </SubMenu>
             </Menu>
           </Header>
-          <Content
-            // className="site-layout-background"
-            style={{
-              // margin: '24px 16px',
-
-              // margin: '40px 40px',
-              // padding: 24,
-              // minHeight: 280,
-              // borderRadius: '8px'
-            }}>
-
+          <Content>
             {this.props.children}
           </Content>
           <Footer></Footer>

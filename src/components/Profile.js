@@ -16,6 +16,27 @@ class Projects extends React.Component {
     render() { return (<div style={{ margin: "15px 10px", backgroundColor: "#f5f5f5", minHeight: '60px', padding: '10px' }}>Project</div>) }
 }
 class ProfileEdit extends React.Component {
+    constructor(props) {
+        super(props);
+        // console.log("Constrictor called...........");
+        // console.log(this.props.data);
+        this.state = {
+            first_name: "Kriti",
+            last_name: "Dewangan",
+            emp_id: "IN-4523",
+            address: "455 S. Airport St. Moncks Corne",
+            city: "Raipur",
+            zip_code: '490213',
+            about_me: "h so, your weak rhyme You doubt I'll bother, reading into it I'll probably won't, left to my own devices But that's the difference in our opinions.",
+            email: ''
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    };
     render() {
         return (
             <div class="container">
@@ -34,13 +55,13 @@ class ProfileEdit extends React.Component {
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="profile_details_text">Employee ID</label>
-                                    <input type="text" name="emp_id" class="form-control" value={data.emp_id} disabled />
+                                    <input type="text" name="emp_id" class="form-control" value={this.state.emp_id} disabled />
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="profile_details_text">Email Address:</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Email" value="" required />
+                                    <input type="email" name="email" class="form-control" placeholder="Email" value={this.state.email} onChange={this.handleChange} required />
                                 </div>
                             </div>
                         </div>
@@ -48,13 +69,13 @@ class ProfileEdit extends React.Component {
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="profile_details_text">First Name</label>
-                                    <input type="text" name="first_name" class="form-control" value={data.first_name} required />
+                                    <input type="text" name="first_name" class="form-control" value={this.state.first_name} onChange={this.handleChange} required />
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="profile_details_text">Last Name </label>
-                                    <input type="text" name="last_name" class="form-control" value={data.last_name} required />
+                                    <input type="text" name="last_name" class="form-control" value={this.state.last_name} onChange={this.handleChange} required />
                                 </div>
                             </div>
                         </div>
@@ -62,7 +83,7 @@ class ProfileEdit extends React.Component {
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label class="profile_details_text">Address</label>
-                                    <input type="text" name="address" class="form-control" value={data.address} required />
+                                    <input type="text" name="address" class="form-control" value={this.state.address} onChange={this.handleChange} required />
                                 </div>
                             </div>
                         </div>
@@ -70,19 +91,19 @@ class ProfileEdit extends React.Component {
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="profile_details_text">City</label>
-                                    <input type="text" name="city" class="form-control" value={data.city} />
+                                    <input type="text" name="city" class="form-control" onChange={this.handleChange} value={this.state.city} />
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="profile_details_text">ZIP Code</label>
-                                    <input type="text" name="zip_code" class="form-control" value={data.zip_code} readonly />
+                                    <input type="text" name="zip_code" class="form-control" onChange={this.handleChange} value={this.state.zip_code} readonly />
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="profile_details_text">Country</label>
-                                    <select id="inputState" class="form-control">
+                                    <select id="inputState" class="form-control" >
                                         <option selected>Choose...</option>
                                         <option>INDIA</option>
                                     </select>
@@ -93,7 +114,7 @@ class ProfileEdit extends React.Component {
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label class="profile_details_text">About Me</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" value={data.about_me}></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" value={this.state.about_me} onChange={this.handleChange}></textarea>
                                 </div>
                             </div>
                         </div>

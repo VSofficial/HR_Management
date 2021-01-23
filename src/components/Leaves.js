@@ -28,6 +28,23 @@ const data = [
 
 ];
 class Leaves extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+        }
+    }
+    componentDidMount() {
+        fetch('http://127.0.0.1:8000/leave/')
+            .then(result => result.json())
+            .then(data => {
+                // console.log(data);
+                this.setState({ data: data });
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
     render() {
         return (
             <div className="site-layout-background"

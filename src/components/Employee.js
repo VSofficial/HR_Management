@@ -28,6 +28,7 @@ class Employee extends React.Component {
             this.setState({ emp: false, leave: true });
     }
     componentDidMount() {
+        // console.log(this.props.location.pathname);
         fetch('http://127.0.0.1:8000/emp_count/')
             .then(result => result.json())
             .then(data => {
@@ -44,7 +45,7 @@ class Employee extends React.Component {
             minHeight: 75,
             // padding: '8px 0 0 0'
         };
-        const style = { backgroundColor: 'white', padding: '8px 0 0 0', borderRadius: 7, minHeight: 75 };
+        const style = { backgroundColor: 'white', padding: '8px 0 0 0', borderRadius: 7, minHeight: 80 };
         const iconStyle = { fontSize: 55, textAlignment: 'center', color: '#1890ff' };
         const buttonStyle = { border: '5px' };
         return (
