@@ -30,8 +30,9 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
 
 class LeaveViewSet(CreateAPIView):
     
+    queryset = Leave.objects.all()
     serializer_class = LeaveSerializer
-    
+
     @classmethod
     def get_extra_actions(cls):
         return []
@@ -42,20 +43,22 @@ class LeaveViewSet(CreateAPIView):
 
         return Response({'Employee ID'} )
 
-    def create(self, request):
-        data = request.data
-        user1 = request.data['username']
-        leaveinfo = Leave()
+    
 
-        user = Leave.objects.filter(username=request.data['username']).first()
-
-        print(user)
-
-        Leave.objects.filter(username=user).update(date_from=F('date_from'))
-        Leave.objects.filter(username=user).update(date_to=F('date_to'))
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object(username)
+        instance.date_from = Leave.objects.filter(username=request.data['username'])
+        instance.save()
         
-        
-        return Response({'complete'})
+        obj = Product.objects.get(pk=pk)
+        obj.name = "some_new_value"
+        obj.save()
+
+        serializer = self.get_serializer(instance)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
 
 
 
