@@ -30,35 +30,37 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
         return Response(status=HTTP_400_BAD_REQUEST)
 
 class LeaveViewSet(CreateAPIView):
-    serializer_class = LeaveSerializer
-   # serializer_class = UserSerializer
-   # queryset = PersonalInfo.objects.all()
-    queryset = User.objects.all()
-    #user1 = User.username
     
-    def post(self, request):
+    serializer_class = LeaveSerializer
+    
+    @classmethod
+    def get_extra_actions(cls):
+        return []
 
-        print(request.data)
-        serializer = LeaveSerializer(data=request.data)
-        serializer.is_valid()
-        info_this = serializer.create(request)
-        if info_this:
-            return Response(status=HTTP_201_CREATED)
-        return Response(status=HTTP_400_BAD_REQUEST)  
+    def get(self, request):
+      #  data = request.data
+       # usern = Leave.objects.filter(username=request.data['username']).first()
+        
 
-'''
-class LeaveViewSet(viewsets.ModelViewSet):
+        return Response({'Employee ID':usern} )
 
-   serializer_class = PersonalInfoSerializer
-   # serializer_class = UserSerializer
-   # queryset = PersonalInfo.objects.all()
-   queryset = User.objects.all()
+    def create(self, request):
+        data = request.data
+        user1 = request.data['username']
+        leaveinfo = Leave()
 
-   def get(self):
-      if self.request.method == "GET":
-          content = {'user_count': '2'}
-          return HttpResponse(json.dumps(content), content_type='application/json')
-'''
+        user = Leave.objects.filter(username=request.data['username']).first()
+
+        print(user)
+
+        Leave.objects.filter(username=user).update(date_from=request.data['date_from'])
+        Leave.objects.filter(username=user).update(date_to=request.data['date_to'])
+        
+        
+        return Response({'complete'})
+
+
+
 
 class PersonalInfoCreateView(CreateAPIView):
     serializer_class = PersonalInfoSerializer
@@ -95,6 +97,11 @@ class CountViewSet(CreateAPIView):
 
 
         return Response({'employee': counting,'male': male_count, 'female' : female_count})
+
+
+
+
+
 
 
 

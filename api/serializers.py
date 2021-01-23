@@ -55,36 +55,13 @@ class StringSerializer(serializers.StringRelatedField):
 
 
 class LeaveSerializer(serializers.ModelSerializer):
-    #username = StringSerializer(many=True)
-
+  
     class Meta:
         model = Leave
-        fields = ('date_from','date_to','username')
-        #fields = ('__all__')
+        #fields = ('date_from','date_to','username_id')
+        fields = ('__all__')
 
-
-    def post(self, request):
-        data = request.data
-
-        leaveinfo = Leave()
-
-        user = Leave.objects.get(username=data['username'])
-        #datafile = request.data['email']
-        #usernaAme = User.objects.filter(username=user).get()
-        '''
-        datefrom = User.objects.filter(username=user).get(date_from=data['date_from'])
-        dateto = User.objects.filter(username=user).get(date_too=data['date_to'])
-        '''
-        
-        task1 = User.objects.filter(username=user).update(date_from=F('date_from'))
-        task2 = User.objects.filter(username=user).update(date_to=F('date_to'))
-        
-        #leaveinfo.username = user
-       # assignment.title = data['title']
-      #  leaveinfo.save()
-
-        #return leaveinfo
-        return Response({'user': user})
+    
 
 class AssignmentSerializer(serializers.ModelSerializer):
     questions = serializers.SerializerMethodField()
