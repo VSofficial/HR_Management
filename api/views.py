@@ -30,7 +30,7 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
         return Response(status=HTTP_400_BAD_REQUEST)
 
 class LeaveViewSet(CreateAPIView):
- 
+    
     serializer_class = LeaveSerializer
     
     @classmethod
@@ -38,9 +38,11 @@ class LeaveViewSet(CreateAPIView):
         return []
 
     def get(self, request):
+      #  data = request.data
+       # usern = Leave.objects.filter(username=request.data['username']).first()
         
 
-        return Response({'employee'} )
+        return Response({'Employee ID':usern} )
 
     def create(self, request):
         data = request.data
@@ -53,26 +55,12 @@ class LeaveViewSet(CreateAPIView):
 
         Leave.objects.filter(username=user).update(date_from=request.data['date_from'])
         Leave.objects.filter(username=user).update(date_to=request.data['date_to'])
-
         
-        return Response({'complete':user})
+        
+        return Response({'complete'})
 
 
 
-
-'''
-class LeaveViewSet(viewsets.ModelViewSet):
-
-   serializer_class = PersonalInfoSerializer
-   # serializer_class = UserSerializer
-   # queryset = PersonalInfo.objects.all()
-   queryset = User.objects.all()
-
-   def get(self):
-      if self.request.method == "GET":
-          content = {'user_count': '2'}
-          return HttpResponse(json.dumps(content), content_type='application/json')
-'''
 
 class PersonalInfoCreateView(CreateAPIView):
     serializer_class = PersonalInfoSerializer
@@ -109,6 +97,11 @@ class CountViewSet(CreateAPIView):
 
 
         return Response({'employee': counting,'male': male_count, 'female' : female_count})
+
+
+
+
+
 
 
 

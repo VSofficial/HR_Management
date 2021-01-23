@@ -61,18 +61,7 @@ class LeaveSerializer(serializers.ModelSerializer):
         #fields = ('date_from','date_to','username_id')
         fields = ('__all__')
 
-    def create(self, request):
-        data = request.data
-        leaveinfo = Leave()
-        user = Leave.objects.get(username=data['username'])
-        print(user)
-
-        leaveinfo.date_form=request.data['date_form']
-        leaveinfo.date_to=request.data['date_to']
-        leaveinfo.username=data['username']
-        leaveinfo.save()
-        
-        return leaveinfo
+    
 
 class AssignmentSerializer(serializers.ModelSerializer):
     questions = serializers.SerializerMethodField()
