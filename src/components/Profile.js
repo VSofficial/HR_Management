@@ -136,14 +136,7 @@ class Profile extends React.Component {
                     <div><Avatar size={90} style={{ color: 'white', backgroundColor: '#fde3cf' }} >{data.first_name.charAt(0)}</Avatar></div>
                     <div><Title level={2}>{data.first_name}{' '}{data.last_name}</Title></div>
                     <div style={{ marginBottom: '15px' }}>
-                        {/* <ul classname='list-unstyled'> */}
-                        {/* <li> */}
-                        <a href="#" class="fa fa-facebook"></a>
-                        <a href="#" class="fa fa-twitter"></a>
-                        <a href="#" class="fa fa-instagram"></a>
-                        <a href="#" class="fa fa-linkedin"></a>
-                        {/* </li> */}
-                        {/* </ul> */}
+                        <a href="#" class="fa fa-facebook"></a><a href="#" class="fa fa-twitter"></a><a href="#" class="fa fa-instagram"></a><a href="#" class="fa fa-linkedin"></a>
                     </div>
                     <div style={{ maxWidth: '600px' }}>
                         <Paragraph strong copyable>{data.about_me}</Paragraph>
