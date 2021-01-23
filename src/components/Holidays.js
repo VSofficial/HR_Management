@@ -30,6 +30,9 @@ class Holidays extends React.Component {
                     // minHeight: 280,
                     borderRadius: '8px'
                 }}>
+                {/* <div style={{ marginBottom: '20px' }}>
+                    HOLIDAY LIST
+                </div> */}
                 <Table
                     columns={columns}
                     dataSource={data}

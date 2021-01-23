@@ -94,7 +94,7 @@ class CustomLayout extends React.Component {
             })} */}
             <Menu style={{ float: 'right' }} theme="dark" mode="horizontal" overflowedIndicator={<MenuOutlined />}>
               <Menu.Item key='/' ><Link to="/"><span>Home</span></Link></Menu.Item>
-              <Menu.Item key='/About' ><Link to="/About"><span>About</span></Link></Menu.Item>
+              {/* <Menu.Item key='/About' ><Link to="/About"><span>About</span></Link></Menu.Item> */}
               <Menu.Item key='/Holidays' ><Link to="/Holidays"><span>Holidays</span></Link></Menu.Item>
               <Menu.Item key='/Policy' ><Link to="/Policy"><span>Policy</span></Link></Menu.Item>
               <Menu.Item key='/FAQ' ><Link to="/FAQ"><span>FAQs</span></Link></Menu.Item>
