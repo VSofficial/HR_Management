@@ -39,19 +39,21 @@ class PersonalInfoCreateView(CreateAPIView):
             return Response(status=HTTP_201_CREATED)
         return Response(status=HTTP_400_BAD_REQUEST)
 
-class CountViewSet(viewsets.ModelViewSet):
+class CountViewSet(CreateAPIView):
     serializer_class = CountSerializer
    # serializer_class = UserSerializer
    # queryset = PersonalInfo.objects.all()
     queryset = User.objects.all()
 
-    def create(self, request):
-        serializer = CountSerializer(data=request.data)
-        if serializer.is_valid():
-            info = serializer.create(request)
-            if info:
-                return Response(status=HTTP_201_CREATED)
-        return Response(status=HTTP_400_BAD_REQUEST)
+    @classmethod
+    def get_extra_actions(cls):
+        return []
+
+    def get(self):
+        all_work_count = User.objects.all()
+        counting = all_work_count.count()
+
+        return Response({'total': '1'})
 
 '''
  class MaleCount(ListAPIView):

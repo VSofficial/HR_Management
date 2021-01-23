@@ -13,7 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('assignments/', include('api.assignments.urls')),
     path('personalinfo/', include('api.personalinfo.urls')),
-    path('count/', include('api.count.urls')),
+    path('count/', include('api.emp_count.urls')),
     path('graded-assignments/', include('api.graded_assignments.urls')),
     path('users/', include('users.urls')),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
