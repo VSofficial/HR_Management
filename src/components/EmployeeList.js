@@ -1,14 +1,20 @@
 import React from "react";
 import { Table, Avatar, Row, Col, Button, Modal, Form, Input, DatePicker } from "antd";
+let count = 1;
 const generateRandomColor = (name) => {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
     // console.log(randomColor);
     return "#" + randomColor;
 }
 const columns = [
-    { title: '#', dataIndex: 'id', key: 'id', width: '10%' },
     {
-        title: 'NAME', key: 'emp_name', width: '25%',
+        title: '#', key: 'id', width: '10%',
+        render: (text, record) => (
+            <span>{count++}</span>
+        )
+    },
+    {
+        title: 'NAME', key: 'emp_name', width: '27%',
         render: (text, record) => (
             <Row>
                 {/* <Col span={5}><Avatar size={40} style={{ color: 'white', backgroundColor: generateRandomColor(text.emp_name) }} >{text.emp_name.charAt(0)}</Avatar></Col> */}
@@ -30,10 +36,17 @@ class EmployeeList extends React.Component {
         this.state = {
             data: [],
             visible: false,
-            dummy: ""
+            first_name: "",
+            last_name: "",
+            username: "",
+            email: "",
+            phone: "",
+            role: "",
         };
         this.handleNewEmployee = this.handleNewEmployee.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
+        this.handleOk = this.handleOk.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     };
     handleNewEmployee = () => {
         this.setState({ visible: true });
@@ -42,6 +55,12 @@ class EmployeeList extends React.Component {
         console.log(e);
         console.log("new employee added");
         this.setState({ visible: false, dummy: e.first_name });
+    };
+    handleChange(e) {
+        // e.preventDefault();
+        this.setState({
+            [e.target.id]: e.target.value
+        })
     }
     handleCancel = () => {
         this.setState({ visible: false });
@@ -58,7 +77,9 @@ class EmployeeList extends React.Component {
             })
     }
     render() {
+        count = 1;
         return (
+
             <div className="site-layout-background"
                 style={{
                     margin: '20px 0px',
@@ -74,22 +95,28 @@ class EmployeeList extends React.Component {
                         title="Add Employee"
                         onOk={this.handleOk}
                         onCancel={this.handleCancel}
-                    // footer={null}
+                        footer={null}
                     >
                         <Form
                             name='basic'
-                            onFinish={this.handleOk}
-                            onFinishFailed={this.handleCancel}
-
+                            onFinish={function (e) { console.log(e) }}
                         >
                             <Form.Item
                                 name='username'
                                 style={{ display: 'inline-block', width: '23%' }}
-                                required={true}><Input placeholder='Employee ID' /></Form.Item>
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}><Input placeholder='Employee ID' /></Form.Item>
                             <Form.Item
                                 name='first_name'
                                 style={{ display: 'inline-block', width: '22%', marginLeft: '15px' }}
-                                required={true}><Input placeholder='First Name' /></Form.Item>
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}><Input placeholder='First Name' /></Form.Item>
                             <Form.Item
                                 name='last_name' required={true} style={{ display: 'inline-block', width: '22%', marginLeft: '15px' }}>
                                 <Input placeholder='Last Name' />
@@ -110,10 +137,17 @@ class EmployeeList extends React.Component {
                                 name='role' required={true} style={{ display: 'inline-block', width: '30%', marginLeft: '15px' }}>
                                 <Input placeholder='Role' />
                             </Form.Item>
-                            {/* <Form.Item>
+                            <Form.Item>
                                 <Button type="secondary" htmlType="submit" style={{ float: 'right' }}>Save</Button>
-                            </Form.Item> */}
+                            </Form.Item>
                         </Form>
+                        {/* <form onSubmit={this.handleOk}>
+                            <label>
+                                Name:
+                            <input type="text" id='first_name' value={this.state.first_name} onChange={this.handleChange} />
+                            </label>
+                            <input type="submit" value="Submit" />
+                        </form> */}
                     </Modal>
                 </div>
 

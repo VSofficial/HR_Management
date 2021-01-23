@@ -10,6 +10,11 @@ class Employee extends React.Component {
         this.state = {
             emp: true,
             leave: false,
+            countDetails: {
+                employee: 0,
+                male: 0,
+                female: 0
+            },
         }
         this.handleEmp = this.handleEmp.bind(this);
         this.handleLeave = this.handleLeave.bind(this);
@@ -21,6 +26,16 @@ class Employee extends React.Component {
     handleLeave = () => {
         if (this.state.emp)
             this.setState({ emp: false, leave: true });
+    }
+    componentDidMount() {
+        fetch('http://127.0.0.1:8000/emp_count/')
+            .then(result => result.json())
+            .then(data => {
+                this.setState({ countDetails: data });
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
     render() {
         const stat = {
@@ -50,7 +65,7 @@ class Employee extends React.Component {
                     <Col className="gutter-row" xs={24} sm={24} md={12} xl={6}>
                         <Row gutter={8} style={style} justify="start">
                             <Col className="gutter-row" span={12} align='start' push={1} style={{ fontSize: '18px' }} >
-                                <div>Total Employee</div><div><b>104</b></div>
+                                <div>Total Employee</div><div><b>{this.state.countDetails.employee}</b></div>
                             </Col>
                             <Col className="gutter-row" span={12} align='right' pull={2} >
                                 <AlignLeftOutlined rotate='270' style={iconStyle} />
@@ -60,7 +75,7 @@ class Employee extends React.Component {
                     <Col className="gutter-row" xs={24} sm={24} md={12} xl={6} >
                         <Row gutter={8} style={style} justify="start">
                             <Col className="gutter-row" span={12} align='start' push={1} style={{ fontSize: '18px' }} >
-                                New Employee<br /><b>12</b>
+                                New Employee<br /><b>{this.state.countDetails.employee}</b>
                             </Col>
                             <Col className="gutter-row" span={12} align='right' pull={2} >
                                 <AlignLeftOutlined rotate='270' style={iconStyle} />
@@ -70,7 +85,7 @@ class Employee extends React.Component {
                     <Col className="gutter-row" xs={24} sm={24} md={12} xl={6} >
                         <Row gutter={8} style={style} justify="start">
                             <Col className="gutter-row" span={12} align='start' push={1} style={{ fontSize: '18px' }} >
-                                Male<br /><b>75</b>
+                                Male<br /><b>{this.state.countDetails.male}</b>
                             </Col>
                             <Col className="gutter-row" span={12} align='right' pull={2} >
                                 <AlignLeftOutlined rotate='270' style={iconStyle} />
@@ -80,7 +95,7 @@ class Employee extends React.Component {
                     <Col className="gutter-row" xs={24} sm={24} md={12} xl={6} >
                         <Row gutter={8} style={style} justify="start">
                             <Col className="gutter-row" span={12} align='start' push={1} style={{ fontSize: '18px' }} >
-                                Female<br /><b>20</b>
+                                Female<br /><b>{this.state.countDetails.female}</b>
                             </Col>
                             <Col className="gutter-row" span={12} align='right' pull={2} >
                                 <AlignLeftOutlined rotate='270' style={iconStyle} />
