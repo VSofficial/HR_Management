@@ -20,11 +20,50 @@
     background: #fff;
   } */
   
-.site-layout .site-layout-background {
-    background: #fff;
-  }
-  [data-theme="dark"] .site-layout-sub-header-background {
-    background: #141414;
-  }
-  
+/* profile social media icons css*/
+      .site-layout .site-layout-background {
+          background: #fff;
+        }
+        [data-theme="dark"] .site-layout-sub-header-background {
+          background: #141414;
+        }
+        
+        .fa {
+          cursor: pointer;
+          font-size: 21px;
+          margin: 5px 10px 5px 10px !important;
+        }
+        .fa {
+          padding: calc(10px + (10 - 10) * ((100vw - 360px) / (1600 - 360))) !important;
+          font-size: calc(
+            15px + (20 - 15) * ((100vw - 360px) / (1600 - 360))
+          ) !important;
+          width: calc(30px + (38 - 30) * ((100vw - 360px) / (1600 - 360))) !important;
+          text-align: center;
+          text-decoration: none;
+          border-radius: 50px !important;
+          margin: 6px !important;
+        }
+        
+        .fa-facebook {
+          background: #bfbfbf;
+          color: white;
+        }
+        .fa:hover {
+          background-color: transparent !important;
+        }
+        .fa-twitter {
+          background: #bfbfbf;
+          color: white;
+        }
+        
+        .fa-instagram {
+          background: #bfbfbf;
+          color: white;
+        }
+        
+        .fa-linkedin {
+          background: #bfbfbf;
+          color: white;
+        }
   
