@@ -1,6 +1,6 @@
 from django.urls import path, include, re_path
-from api.views import LeaveViewSetMain
+from api.views import LeaveViewSet
 
 urlpatterns = [
-    path('', LeaveViewSetMain.as_view()),
+    path('', LeaveViewSet.as_view()),
 ]
