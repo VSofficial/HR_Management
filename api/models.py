@@ -1,5 +1,6 @@
 from django.db import models
-from users.models import User
+#from .models import User
+#from users.models import User
 
 
 class Holiday(models.Model):
@@ -9,6 +10,29 @@ class Holiday(models.Model):
     def __str__(self):
         return self.title
 
+class User(models.Model):
+  
+  first_name = models.CharField(max_length=40)
+  last_name = models.CharField(max_length=40)
+  username = models.CharField(max_length=10, unique=True)
+  email = models.EmailField(max_length=100)
+  date_joined = models.DateField(auto_now=True)
+  phone = models.CharField(max_length=10, null=True, blank=True)
+  role = models.CharField(max_length=40, null=True, blank=True)
+  #first_name = models.CharField(max_length=50)
+  #last_name = models.CharField(max_length=50)
+  gender = models.CharField(max_length=10, null=True, blank=True)
+  dob = models.DateField(null=True,blank=True)
+  salary = models.CharField(max_length=10,null=True,blank=True)
+  team = models.CharField(max_length=100,null=True,blank=True)
+ 
+
+
+
+  def __str__(self):
+    return self.username
+
+'''
 class PersonalInfo(models.Model):
 
     
@@ -28,7 +52,7 @@ class PersonalInfo(models.Model):
     def __str__(self):
         return self.first_name
     #NOTE Employee ID is the username in the model
-'''
+
 class Project(models.Model):
     title = models.CharField(max_length=50)
     #deadline = models.DateField() 

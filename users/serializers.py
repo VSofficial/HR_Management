@@ -9,7 +9,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('firstname','lastname','email','datetime', 'username', 'password','is_staff','is_superuser')
+        fields = ('first_name','last_name','email','date_joined', 'username', 'password','is_staff','is_superuser')
 
 
 
@@ -19,7 +19,7 @@ class CustomRegisterSerializer(RegisterSerializer):
 
     class Meta:
         model = User
-        fields = ('firstname','lastname','datetime','email', 'username', 'password', 'is_staff', 'is_superuser')
+        fields = ('first_name','last_name','date_joined','email', 'username', 'password', 'is_staff', 'is_superuser')
 
     def get_cleaned_data(self):
         return {
@@ -29,9 +29,9 @@ class CustomRegisterSerializer(RegisterSerializer):
             'email': self.validated_data.get('email', ''),
             'is_staff': self.validated_data.get('is_staff', ''),
             'is_superuser': self.validated_data.get('is_superuser', ''),
-            'firstname': self.validated_data.get('firstname', ''),
-            'lastname': self.validated_data.get('lastname', ''),
-            'datetime': self.validated_data.get('datetime', ''),
+            'first_name': self.validated_data.get('first_name', ''),
+            'last_name': self.validated_data.get('last_name', ''),
+            'date_joined': self.validated_data.get('date_joined', ''),
             
         }
 
