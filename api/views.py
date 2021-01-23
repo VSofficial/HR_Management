@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIView
 from rest_framework.views import APIView
+from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_201_CREATED,
@@ -9,6 +10,7 @@ from rest_framework.status import (
 
 from .models import Assignment, GradedAssignment, User
 from .serializers import AssignmentSerializer, GradedAssignmentSerializer, PersonalInfoSerializer, CountSerializer
+
 #from users.models import User
 
 
@@ -25,6 +27,19 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
             if info:
                 return Response(status=HTTP_201_CREATED)
         return Response(status=HTTP_400_BAD_REQUEST)
+
+
+class LeaveViewSet(viewsets.ModelViewSet):
+
+   serializer_class = PersonalInfoSerializer
+   # serializer_class = UserSerializer
+   # queryset = PersonalInfo.objects.all()
+   queryset = User.objects.all()
+
+   def get_queryset(self):
+      if self.request.method == "GET":
+          content = {'user_count': '2'}
+          return HttpResponse(json.dumps(content), content_type='application/json')
 
 class PersonalInfoCreateView(CreateAPIView):
     serializer_class = PersonalInfoSerializer
@@ -49,7 +64,7 @@ class CountViewSet(CreateAPIView):
     def get_extra_actions(cls):
         return []
 
-    def get(self):
+    def get(self, request):
         all_work_count = User.objects.all()
         counting = all_work_count.count()
 
@@ -91,17 +106,6 @@ class AssignmentViewSet(viewsets.ModelViewSet):
             if assignment:
                 return Response(status=HTTP_201_CREATED)
         return Response(status=HTTP_400_BAD_REQUEST)
-
-
-class GradedAssignmentListView(ListAPIView):
-    serializer_class = GradedAssignmentSerializer
-
-    def get_queryset(self):
-        queryset = GradedAssignment.objects.all()
-        username = self.request.query_params.get('username', None)
-        if username is not None:
-            queryset = queryset.filter(student__username=username)
-        return queryset
 
 
 class GradedAssignmentCreateView(CreateAPIView):
