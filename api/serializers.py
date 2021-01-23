@@ -1,7 +1,8 @@
 from rest_framework import serializers
-
+from django.db.models import F
 from django.http import HttpResponse
-from .models import Assignment, Question, Choice, GradedAssignment, User
+from rest_framework.response import Response
+from .models import Assignment, Question, Choice, GradedAssignment, User, Leave
 
 
 class PersonalInfoSerializer(serializers.ModelSerializer):
@@ -53,13 +54,37 @@ class StringSerializer(serializers.StringRelatedField):
         return value
 
 
-class QuestionSerializer(serializers.ModelSerializer):
-    choices = StringSerializer(many=True)
+class LeaveSerializer(serializers.ModelSerializer):
+    #username = StringSerializer(many=True)
 
     class Meta:
-        model = Question
-        fields = ('id', 'choices', 'question', 'order')
+        model = Leave
+        fields = ('date_from','date_to','username')
+        #fields = ('__all__')
 
+
+    def post(self, request):
+        data = request.data
+
+        leaveinfo = Leave()
+
+        user = Leave.objects.get(username=data['username'])
+        #datafile = request.data['email']
+        #usernaAme = User.objects.filter(username=user).get()
+        '''
+        datefrom = User.objects.filter(username=user).get(date_from=data['date_from'])
+        dateto = User.objects.filter(username=user).get(date_too=data['date_to'])
+        '''
+        
+        task1 = User.objects.filter(username=user).update(date_from=F('date_from'))
+        task2 = User.objects.filter(username=user).update(date_to=F('date_to'))
+        
+        #leaveinfo.username = user
+       # assignment.title = data['title']
+      #  leaveinfo.save()
+
+        #return leaveinfo
+        return Response({'user': user})
 
 class AssignmentSerializer(serializers.ModelSerializer):
     questions = serializers.SerializerMethodField()
