@@ -3,6 +3,7 @@ import json
 from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIView
 from rest_framework.views import APIView
 from django.http import HttpResponse
+from django.db.models import F
 from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_201_CREATED,
@@ -17,8 +18,6 @@ from .serializers import LeaveSerializer, AssignmentSerializer, GradedAssignment
 
 class PersonalInfoViewSet(viewsets.ModelViewSet):
     serializer_class = PersonalInfoSerializer
-   # serializer_class = UserSerializer
-   # queryset = PersonalInfo.objects.all()
     queryset = User.objects.all()
 
     def create(self, request):
@@ -38,11 +37,10 @@ class LeaveViewSet(CreateAPIView):
         return []
 
     def get(self, request):
-      #  data = request.data
-       # usern = Leave.objects.filter(username=request.data['username']).first()
+      
         
 
-        return Response({'Employee ID':usern} )
+        return Response({'Employee ID'} )
 
     def create(self, request):
         data = request.data
@@ -53,8 +51,8 @@ class LeaveViewSet(CreateAPIView):
 
         print(user)
 
-        Leave.objects.filter(username=user).update(date_from=request.data['date_from'])
-        Leave.objects.filter(username=user).update(date_to=request.data['date_to'])
+        Leave.objects.filter(username=user).update(date_from=F('date_from'))
+        Leave.objects.filter(username=user).update(date_to=F('date_to'))
         
         
         return Response({'complete'})
