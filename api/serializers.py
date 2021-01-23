@@ -66,9 +66,9 @@ class LeaveSerializer(serializers.ModelSerializer):
     def post(self, request):
         data = request.data
 
-        leaveinfo = User()
+        leaveinfo = Leave()
 
-        user = User.objects.get(username=data['username'])
+        user = Leave.objects.get(username=data['username'])
         #datafile = request.data['email']
         #usernaAme = User.objects.filter(username=user).get()
         '''
@@ -76,15 +76,15 @@ class LeaveSerializer(serializers.ModelSerializer):
         dateto = User.objects.filter(username=user).get(date_too=data['date_to'])
         '''
         
-        task1 = User.objects.filter(email=user).update(date_from=F('date_from'))
-        task2 = User.objects.filter(email=user).update(date_to=F('date_to'))
+        task1 = User.objects.filter(username=user).update(date_from=F('date_from'))
+        task2 = User.objects.filter(username=user).update(date_to=F('date_to'))
         
         #leaveinfo.username = user
        # assignment.title = data['title']
       #  leaveinfo.save()
 
         #return leaveinfo
-        return Response({'email': user})
+        return Response({'user': user})
 
 class AssignmentSerializer(serializers.ModelSerializer):
     questions = serializers.SerializerMethodField()
