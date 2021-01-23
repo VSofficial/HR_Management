@@ -7,11 +7,11 @@ from rest_framework.status import (
     HTTP_400_BAD_REQUEST
 )
 
-from .models import Assignment, GradedAssignment, PersonalInfo
-from .serializers import AssignmentSerializer, GradedAssignmentSerializer, PersonalInfoSerializer
-from users.models import User
+from .models import Assignment, GradedAssignment, User
+from .serializers import AssignmentSerializer, GradedAssignmentSerializer, PersonalInfoSerializer, CountSerializer
+#from users.models import User
 
-#class PersonalInfoViewSet(viewsets.ModelViewSet):
+
 class PersonalInfoViewSet(viewsets.ModelViewSet):
     serializer_class = PersonalInfoSerializer
    # serializer_class = UserSerializer
@@ -28,7 +28,7 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
 
 class PersonalInfoCreateView(CreateAPIView):
     serializer_class = PersonalInfoSerializer
-    queryset = PersonalInfo.objects.all()
+    queryset = User.objects.all()
 
     def post(self, request):
         print(request.data)
@@ -39,6 +39,42 @@ class PersonalInfoCreateView(CreateAPIView):
             return Response(status=HTTP_201_CREATED)
         return Response(status=HTTP_400_BAD_REQUEST)
 
+class CountViewSet(viewsets.ModelViewSet):
+    serializer_class = CountSerializer
+   # serializer_class = UserSerializer
+   # queryset = PersonalInfo.objects.all()
+    queryset = User.objects.all()
+
+    def create(self, request):
+        serializer = CountSerializer(data=request.data)
+        if serializer.is_valid():
+            info = serializer.create(request)
+            if info:
+                return Response(status=HTTP_201_CREATED)
+        return Response(status=HTTP_400_BAD_REQUEST)
+
+'''
+ class MaleCount(ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    def get_queryset(self):
+        
+        male_count = User.objects.filter(gender='M').count()
+        #gender = self.request.query_params.get('gender', None)
+        return male_count
+
+ class FemaleCount(ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    def get_queryset(self):
+        
+        female_count = User.objects.filter(gender='F').count()
+        #gender = self.request.query_params.get('gender', None)
+        return female_count
+
+'''
 
 # Seperation Line
 
