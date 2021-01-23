@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 #from .models import User
 #from users.models import User
 
@@ -16,7 +17,7 @@ class User(models.Model):
   last_name = models.CharField(max_length=40)
   username = models.CharField(max_length=10, unique=True)
   email = models.EmailField(max_length=100)
-  date_joined = models.DateField(auto_now=True)
+  date_joined = models.DateField(auto_now=True,null=True)
   phone = models.CharField(max_length=10, null=True, blank=True)
   role = models.CharField(max_length=40, null=True, blank=True)
   #first_name = models.CharField(max_length=50)
@@ -25,12 +26,28 @@ class User(models.Model):
   dob = models.DateField(null=True,blank=True)
   salary = models.CharField(max_length=10,null=True,blank=True)
   team = models.CharField(max_length=100,null=True,blank=True)
- 
+  #refrence
+  date_from = models.DateField(null=True, blank=True)
+  date_to = models.DateField(null=True, blank=True)
+  status = models.CharField(max_length=10,null=True,blank=True)
+  #empid = models.CharField(max_length=50)
 
 
 
   def __str__(self):
     return self.username
+
+
+'''
+class Leave(models.Model):
+    # Forign key Emp ID
+    
+    
+    date_from = models.DateField()
+    date_to = models.DateField()
+    status = models.CharField(max_length=10)
+    empid = models.CharField(max_length=50)
+'''
 
 '''
 class PersonalInfo(models.Model):
