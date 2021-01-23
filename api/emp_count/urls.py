@@ -1,6 +1,6 @@
-from rest_framework.routers import DefaultRouter
+from django.urls import path, include, re_path
 from api.views import CountViewSet
 
-router = DefaultRouter()
-router.register(r'', CountViewSet, base_name='emp_count')
-urlpatterns = router.urls
+urlpatterns = [
+    path('', CountViewSet.as_view()),
+]

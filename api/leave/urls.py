@@ -1,6 +1,6 @@
-from rest_framework.routers import DefaultRouter
-from api.views import LeaveViewSet
+from django.urls import path, include, re_path
+from api.views import LeaveViewSetMain
 
-router = DefaultRouter()
-router.register(r'', LeaveViewSet, base_name='leave')
-urlpatterns = router.urls
+urlpatterns = [
+    path('', LeaveViewSetMain.as_view()),
+]

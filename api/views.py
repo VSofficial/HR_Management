@@ -30,6 +30,7 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
         return Response(status=HTTP_400_BAD_REQUEST)
 
 
+
 class LeaveViewSet(viewsets.ModelViewSet):
 
    serializer_class = PersonalInfoSerializer
@@ -37,7 +38,7 @@ class LeaveViewSet(viewsets.ModelViewSet):
    # queryset = PersonalInfo.objects.all()
    queryset = User.objects.all()
 
-   def get_queryset(self):
+   def get(self):
       if self.request.method == "GET":
           content = {'user_count': '2'}
           return HttpResponse(json.dumps(content), content_type='application/json')
@@ -60,16 +61,22 @@ class CountViewSet(CreateAPIView):
    # serializer_class = UserSerializer
    # queryset = PersonalInfo.objects.all()
     queryset = User.objects.all()
-
+    #user1 = User.username
     @classmethod
     def get_extra_actions(cls):
         return []
 
     def get(self, request):
-        all_work_count = User.objects.all()
-        counting = all_work_count.count()
 
-        return Response({'total': '1'})
+        all_count = User.objects.all()
+      #  user_name = request.query_params['username']
+        male_count = User.objects.filter(gender='M').count()
+        female_count = User.objects.filter(gender='F').count()
+
+        counting = all_count.count()
+
+
+        return Response({'employee': counting,'male': male_count, 'female' : female_count})
 
 '''
  class MaleCount(ListAPIView):
