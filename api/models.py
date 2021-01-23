@@ -20,8 +20,8 @@ class User(models.Model):
   date_joined = models.DateField(auto_now=True,null=True)
   phone = models.CharField(max_length=10, null=True, blank=True)
   role = models.CharField(max_length=40, null=True, blank=True)
-  #first_name = models.CharField(max_length=50)
-  #last_name = models.CharField(max_length=50)
+  password = models.CharField(max_length=100, null=True)
+  # Seperation level
   gender = models.CharField(max_length=10, null=True, blank=True)
   dob = models.DateField(null=True,blank=True)
   salary = models.CharField(max_length=10,null=True,blank=True)
@@ -45,6 +45,7 @@ class Leave(models.Model):
     date_from = models.DateField()
     date_to = models.DateField()
     status = models.CharField(max_length=10)
+    reason = models.CharField(max_length=100)
     username = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

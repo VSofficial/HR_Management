@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 import json
+
 from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIView
 from rest_framework.views import APIView
 from django.http import HttpResponse
@@ -95,15 +96,19 @@ class CountViewSet(CreateAPIView):
 
 class LeaveViewSetGET(ListAPIView):
     serializer_class = LeaveSerializer
-    queryset = Leave.objects.all()
+    queryset = Leave.objects.all().first()
 
     def get(self, request):
-        serializer = LeaveSerializer(data=request.data)
-        if serializer.is_valid():
-            leave = serializer.create(request)
-            if assignment:
-                return Response(status=HTTP_201_CREATED)
-        return Response(status=HTTP_400_BAD_REQUEST)
+
+        queryset = Leave.objects.all()
+        #  user_name = request.query_params['username']
+        #male_count = User.objects.filter(gender='M').count()
+        #female_count = User.objects.filter(gender='F').count()
+
+        #counting = all_count.count()
+
+
+        return Response({queryset})
 
 
 

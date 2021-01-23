@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('assignments/', include('api.assignments.urls')),
     path('leave/', include('api.leave.urls')),
+    path('leave_view/', include('api.leave_view.urls')),
     path('personalinfo/', include('api.personalinfo.urls')),
     path('emp_count/', include('api.emp_count.urls')),
     #path('graded-assignments/', include('api.graded_assignments.urls')),
