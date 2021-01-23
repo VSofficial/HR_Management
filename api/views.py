@@ -3,6 +3,7 @@ import json
 from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIView
 from rest_framework.views import APIView
 from django.http import HttpResponse
+from django.db.models import F
 from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_201_CREATED,
@@ -17,8 +18,6 @@ from .serializers import LeaveSerializer, AssignmentSerializer, GradedAssignment
 
 class PersonalInfoViewSet(viewsets.ModelViewSet):
     serializer_class = PersonalInfoSerializer
-   # serializer_class = UserSerializer
-   # queryset = PersonalInfo.objects.all()
     queryset = User.objects.all()
 
     def create(self, request):
@@ -31,35 +30,30 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
 
 class LeaveViewSet(CreateAPIView):
     
+    queryset = Leave.objects.all()
     serializer_class = LeaveSerializer
-    
+
     @classmethod
     def get_extra_actions(cls):
         return []
-
-    def get(self, request):
-      #  data = request.data
-       # usern = Leave.objects.filter(username=request.data['username']).first()
+    
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object(username)
+        instance.date_to = Leave.objects.filter(username=request.data['username'])
+        instance.date_from = Leave.objects.filter(username=request.data['username'])
+        instance.save()
         
+        obj = Product.objects.get(pk=pk)
+        obj.name = "some_new_value"
+        obj.save()
 
-        return Response({'Employee ID':usern} )
+        serializer = self.get_serializer(instance)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
 
-    def create(self, request):
-        data = request.data
-        user1 = request.data['username']
-        leaveinfo = Leave()
+        return Response(serializer.data)
 
-        user = Leave.objects.filter(username=request.data['username']).first()
-
-        print(user)
-
-        Leave.objects.filter(username=user).update(date_from=request.data['date_from'])
-        Leave.objects.filter(username=user).update(date_to=request.data['date_to'])
-        
-        
-        return Response({'complete'})
-
-
+   
 
 
 class PersonalInfoCreateView(CreateAPIView):
@@ -99,7 +93,17 @@ class CountViewSet(CreateAPIView):
         return Response({'employee': counting,'male': male_count, 'female' : female_count})
 
 
+class LeaveViewSetGET(ListAPIView):
+    serializer_class = LeaveSerializer
+    queryset = Leave.objects.all()
 
+    def get(self, request):
+        serializer = LeaveSerializer(data=request.data)
+        if serializer.is_valid():
+            leave = serializer.create(request)
+            if assignment:
+                return Response(status=HTTP_201_CREATED)
+        return Response(status=HTTP_400_BAD_REQUEST)
 
 
 
