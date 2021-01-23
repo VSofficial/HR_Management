@@ -36,17 +36,10 @@ class LeaveViewSet(CreateAPIView):
     @classmethod
     def get_extra_actions(cls):
         return []
-
-    def get(self, request):
-      
-        
-
-        return Response({'Employee ID'} )
-
     
-
     def update(self, request, *args, **kwargs):
         instance = self.get_object(username)
+        instance.date_to = Leave.objects.filter(username=request.data['username'])
         instance.date_from = Leave.objects.filter(username=request.data['username'])
         instance.save()
         
@@ -60,7 +53,7 @@ class LeaveViewSet(CreateAPIView):
 
         return Response(serializer.data)
 
-
+   
 
 
 class PersonalInfoCreateView(CreateAPIView):
@@ -100,7 +93,17 @@ class CountViewSet(CreateAPIView):
         return Response({'employee': counting,'male': male_count, 'female' : female_count})
 
 
+class LeaveViewSetGET(ListAPIView):
+    serializer_class = LeaveSerializer
+    queryset = Leave.objects.all()
 
+    def get(self, request):
+        serializer = LeaveSerializer(data=request.data)
+        if serializer.is_valid():
+            leave = serializer.create(request)
+            if assignment:
+                return Response(status=HTTP_201_CREATED)
+        return Response(status=HTTP_400_BAD_REQUEST)
 
 
 
