@@ -30,21 +30,35 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
         return Response(status=HTTP_400_BAD_REQUEST)
 
 class LeaveViewSet(CreateAPIView):
+ 
     serializer_class = LeaveSerializer
-   # serializer_class = UserSerializer
-   # queryset = PersonalInfo.objects.all()
-    queryset = User.objects.all()
-    #user1 = User.username
     
-    def post(self, request):
+    @classmethod
+    def get_extra_actions(cls):
+        return []
 
-        print(request.data)
-        serializer = LeaveSerializer(data=request.data)
-        serializer.is_valid()
-        info_this = serializer.create(request)
-        if info_this:
-            return Response(status=HTTP_201_CREATED)
-        return Response(status=HTTP_400_BAD_REQUEST)  
+    def get(self, request):
+        
+
+        return Response({'employee'} )
+
+    def create(self, request):
+        data = request.data
+        user1 = request.data['username']
+        leaveinfo = Leave()
+
+        user = Leave.objects.filter(username=request.data['username']).first()
+
+        print(user)
+
+        Leave.objects.filter(username=user).update(date_from=request.data['date_from'])
+        Leave.objects.filter(username=user).update(date_to=request.data['date_to'])
+
+        
+        return Response({'complete':user})
+
+
+
 
 '''
 class LeaveViewSet(viewsets.ModelViewSet):
