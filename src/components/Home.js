@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Row, Col } from "antd";
 import { Link, withRouter } from "react-router-dom";
-import { UsergroupAddOutlined, LikeOutlined, BuildOutlined, DeploymentUnitOutlined, FormOutlined, FundProjectionScreenOutlined, PayCircleOutlined } from "@ant-design/icons";
+import { UsergroupAddOutlined, TeamOutlined, LikeOutlined, BuildOutlined, DeploymentUnitOutlined, FormOutlined, FundProjectionScreenOutlined, PayCircleOutlined } from "@ant-design/icons";
 // import { Link } fro/m "react-router-dom";
 const { Title, Text, Paragraph } = Typography;
 
@@ -24,7 +24,7 @@ class Home extends React.Component {
                     <Col className="gutter-row" xs={24} sm={24} md={8} xl={4}>
                         <Link to="/Employee">
                             <Row gutter={8} style={style} justify="center" align="middle">
-                                <div><UsergroupAddOutlined style={{ fontSize: '50px' }} /></div>
+                                <div><TeamOutlined style={{ fontSize: '50px' }} /></div>
                                 <Text>Users</Text>
                             </Row>
                         </Link>
