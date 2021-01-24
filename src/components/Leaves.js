@@ -24,7 +24,7 @@ const columns = [
 ];
 const data = [
     { emp_name: "Marshall Nichols", emp_id: "LA-8150", type: "Casual Leave", date: '24 July, 2019 to 26 July, 2019', reason: "Going to family function" },
-    { emp_name: "Marshall Nichols", emp_id: "LA-8150", type: "Casual Leave", date: '24 July, 2019 to 26 July, 2019', reason: "Going to family function" }
+    { emp_name: "Kriti Dewangan", emp_id: "IN-0216", type: "Emergency Leave", date: '21 Feb, 2021 to 26 Feb, 2021', reason: "Going to family function" }
 
 ];
 class Leaves extends React.Component {
@@ -35,15 +35,15 @@ class Leaves extends React.Component {
         }
     }
     componentDidMount() {
-        fetch('http://127.0.0.1:8000/leave/')
-            .then(result => result.json())
-            .then(data => {
-                // console.log(data);
-                this.setState({ data: data });
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        // fetch('http://127.0.0.1:8000/leave/')
+        //     .then(result => result.json())
+        //     .then(data => {
+        //         // console.log(data);
+        //         this.setState({ data: data });
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     })
     }
     render() {
         return (
