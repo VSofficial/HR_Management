@@ -9,7 +9,7 @@ class Holiday(models.Model):
         return self.title
 
 class User(models.Model):
-  
+    
   first_name = models.CharField(max_length=40)
   last_name = models.CharField(max_length=40)
   username = models.CharField(max_length=10, null=False,unique=True, primary_key=True)
