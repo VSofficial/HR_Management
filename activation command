@@ -1,0 +1,3 @@
+For Windows Machines, Use this command in the project directory to activate virtualenvironment
+
+env\Scripts\activate.bat
