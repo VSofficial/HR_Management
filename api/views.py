@@ -57,6 +57,7 @@ class PersonalInfoCreateView(CreateAPIView):
     serializer_class = PersonalInfoSerializer
     queryset = User.objects.all()
 
+
     def post(self, request):
         print(request.data)
         serializer = PersonalInfoSerializer(data=request.data)
@@ -83,15 +84,5 @@ class CountViewSet(CreateAPIView):
         counting = all_count.count()
 
         return Response({'employee': counting,'male': male_count, 'female' : female_count})
-
-
-class LeaveViewSetGET(ListAPIView):
-    serializer_class = LeaveSerializer
-    queryset = Leave.objects.all().first()
-
-    def get(self, request):
-        queryset = Leave.objects.all()
-        return Response({queryset})
-
 
 
