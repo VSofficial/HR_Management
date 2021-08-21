@@ -1,5 +1,5 @@
 import os
-import django_heroku
+#import django_heroku
 
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
@@ -110,4 +110,4 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
